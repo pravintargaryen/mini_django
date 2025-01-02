@@ -71,7 +71,8 @@ If you want to run this without including the autograder run the program as foll
 
     python ruserver.py 9000 none
 
-You can also do development with a local copy of the autograder JavaScript as follows:
+Assuming you have DJ4E running on your computer, you can  do development with a local
+copy of the autograder JavaScript endpoint as follows:
 
     python runserver.py 9000 http://localhost:8888/dj4e/tools/jsauto/autograder.js
 
