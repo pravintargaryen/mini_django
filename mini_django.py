@@ -149,6 +149,7 @@ def view_fail(req: HttpRequest, code: str, failure: str) -> HttpResponse:
 
     res.headers['Content-Type'] = 'text/html; charset=utf-8'
 
+    res.write("<!DOCTYPE html>");
     res.write('<html><body>')
     if res.code == "404" :
         res.write('<div style="background-color: rgb(255, 255, 204);">')
