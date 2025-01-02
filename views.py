@@ -10,7 +10,7 @@ def root(req: HttpRequest) -> HttpResponse:
     res.write("<html><head></head><body>")
     res.write("<p>mini_django seems to be working!</p>");
     res.write("<p>This is the page at the root path, try another path</p>")
-    res.write("<p>Try /dj4e /js4e /ca4e or /broken</p>")
+    res.write("<p>Try /dj4e /js4e or generate errors with /missing or /broken</p>")
     res.write("</body></html>")
     return res
 
