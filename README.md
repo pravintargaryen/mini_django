@@ -33,7 +33,7 @@ Interesting URLs and Views
 
 * http://localhost:9000 is the root path and returns a `text/html` (200) response.
 * http://localhost:9000/dj4e returns a `text/plain` (200) response.
-* http://localhost:9000/js4e returns a HTTP redirect (302) response.
+* http://localhost:9000/js4e returns a HTTP redirect (302) response. (watch the Network tab of the developer tools)
 * http://localhost:9000/broken routes to a view which has a bug that
 returns a string instead of an `HttpResponse` object.  The `httpServer()` detects this and returns a HTTP server error
 (500) response.
