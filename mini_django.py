@@ -42,8 +42,8 @@ def parseRequest(rd:str) -> HttpRequest:
         firstline = lines[0]
         pieces = firstline.split(' ')
         if len(pieces) >= 2 :
-            retval.method = pieces[0] or 'Missing';
-            retval.path = pieces[1] or 'Missing';
+            retval.method = pieces[0] or 'Missing'
+            retval.path = pieces[1] or 'Missing'
 
     # Accept-Language: en-US,en;q=0.5
     for line in lines:
@@ -83,6 +83,8 @@ def responseSend(clientsocket, response: HttpResponse) :
         print(traceback.format_exc())
 
 # If we are sending HTML, include the endpoint for the DJ4E JavaScript autograder
+# If you don't want to include the autograder library run this as
+# python runserver.py 9000 none
 # For local dev testing, this can be run as
 # python runserver.py 9000 http://localhost:8888/dj4e/tools/jsauto/autograder.js
 
@@ -91,13 +93,10 @@ def patchAutograder(line: str) -> str:
     dj4e_autograder = "https://www.dj4e.com/tools/jsauto/autograder.js"
     if len(sys.argv) > 2 :
         dj4e_autograder = sys.argv[2]
-    return line.replace('</body>', '\n<script src="'+dj4e_autograder+'"></script>\n</body>');
+    if dj4e_autograder == "none" : return
+    return line.replace('</body>', '\n<script src="'+dj4e_autograder+'"></script>\n</body>')
 
-def httpServer(router):
-    port = 9000
-    if len(sys.argv) > 1 :
-        port = int(sys.argv[1])
-
+def httpServer(router, port):
     print('\n================ Starting mini_django server on '+str(port))
     serversocket = socket(AF_INET, SOCK_STREAM)
     try :

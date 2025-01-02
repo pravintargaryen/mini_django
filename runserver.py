@@ -1,6 +1,11 @@
 import mini_django
+import sys
 import urls
 
-print('Access http://localhost:9000')
-mini_django.httpServer(urls.router)
+port = 9000
+if len(sys.argv) > 1 :
+    port = int(sys.argv[1])
+
+print('Access http://localhost:'+str(port))
+mini_django.httpServer(urls.router, port)
 
