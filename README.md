@@ -40,10 +40,10 @@ uses a series if `if-then-else` tests to pick the correct view for the path.
 
 `views.py`
 
-This is very similar to the `views.py` in "real Django.  Each view is a function that takes an `HttpRequest`
+This is very similar to the `views.py` in "real Django".  Each view is a function that takes an `HttpRequest`
 as its parameter and returns an `HttpResponse` as its return value.  In each view, the code creates
 an `HttpResponse` and sets headers in the response and adds the body text to the response and then 
-returns it to `mini_django` which then correctly formats the response and sende it back to the browser
+returns it to `mini_django` which then correctly formats the response and sends it back to the browser
 to complete the request / response cycle.
 
 AutoGrader Support
