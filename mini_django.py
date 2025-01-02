@@ -21,7 +21,7 @@ class HttpResponse:
     headers: dict = field(default_factory=dict)
     _body: list = field(default_factory=list)
 
-    def println(self, line: str) :
+    def write(self, line: str) :
         self._body.append(line)
 
 def parseRequest(rd:str) -> HttpRequest:
@@ -149,22 +149,22 @@ def view_fail(req: HttpRequest, code: str, failure: str) -> HttpResponse:
 
     res.headers['Content-Type'] = 'text/html; charset=utf-8'
 
-    res.println('<html><body>')
+    res.write('<html><body>')
     if res.code == "404" :
-        res.println('<div style="background-color: rgb(255, 255, 204);">')
+        res.write('<div style="background-color: rgb(255, 255, 204);">')
     else :
-        res.println('<div style="background-color: pink;">')
+        res.write('<div style="background-color: pink;">')
 
-    res.println('<b>Page has errors</b>')
-    res.println('<div><b>Request Method:</b> '+req.method+"</div>")
-    res.println('<div><b>Request URL:</b> '+req.path+'</div>')
-    res.println('<div><b>Response Failure:</b> '+failure+'</div>')
-    res.println('<div><b>Response Code:</b> '+res.code+'</div>')
-    res.println("</div><pre>")
-    res.println("Valid paths: /dj4e /js4e or /404")
-    res.println("\nRequest header data:")
-    res.println(json.dumps(req.headers, indent=4))
-    res.println("</pre></body></html>")
+    res.write('<b>Page has errors</b>')
+    res.write('<div><b>Request Method:</b> '+req.method+"</div>")
+    res.write('<div><b>Request URL:</b> '+req.path+'</div>')
+    res.write('<div><b>Response Failure:</b> '+failure+'</div>')
+    res.write('<div><b>Response Code:</b> '+res.code+'</div>')
+    res.write("</div><pre>")
+    res.write("Valid paths: /dj4e /js4e or /404")
+    res.write("\nRequest header data:")
+    res.write(json.dumps(req.headers, indent=4))
+    res.write("</pre></body></html>")
     return res
 
 

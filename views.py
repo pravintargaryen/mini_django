@@ -6,16 +6,17 @@ from mini_django import HttpRequest, HttpResponse
 def root(req: HttpRequest) -> HttpResponse:
     res = HttpResponse()
     res.headers['Content-Type'] = 'text/html; charset=utf-8'
-    res.println("<html><head></head><body>")
-    res.println("This is the page at the root path, try another path")
-    res.println("Try /dj4e /js4e /ca4e or /broken")
-    res.println("</body></html>")
+    res.write("<html><head></head><body>")
+    res.write("<p>mini_django seems to be working!</p>");
+    res.write("<p>This is the page at the root path, try another path</p>")
+    res.write("<p>Try /dj4e /js4e /ca4e or /broken</p>")
+    res.write("</body></html>")
     return res
 
 def dj4e(req: HttpRequest) -> HttpResponse:
     res = HttpResponse()
     res.headers['Content-Type'] = 'text/plain; charset=utf-8'
-    res.println("Django is fun")
+    res.write("Django is fun")
     return res
 
 def js4e(req: HttpRequest) -> HttpResponse:
@@ -23,7 +24,7 @@ def js4e(req: HttpRequest) -> HttpResponse:
     res.code = "302"    # Lets do a temporary redirect...
     res.headers['Location'] = '/dj4e'
     res.headers['Content-Type'] = 'text/plain; charset=utf-8'
-    res.println("You will only see this in the debugger!")
+    res.write("You will only see this in the debugger!")
     return res
 
 def broken(req: HttpRequest):
