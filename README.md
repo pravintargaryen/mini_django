@@ -31,22 +31,14 @@ And navigate to http://localhost:9001
 Interesting URLs and Views
 --------------------------
 
-<a href="http://localhost:9000" target="_blank">http://localhost:9000</a> is the root path and returns a `text/html`
-(200) response.
-
-<a href="http://localhost:9000/dj4e" target="_blank">http://localhost:9000/dj4e</a> returns a `text/plain`
-(<a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">200</a>) response.
-
-<a href="http://localhost:9000/js4e" target="_blank">http://localhost:9000/js4e</a> returns a HTTP redirect
-(<a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">302</a>) response.
-
-<a href="http://localhost:9000/broken" target="_blank">http://localhost:9000/broken</a> this routes to a view which has a bug that
+* http://localhost:9000 is the root path and returns a `text/html` (200) response.
+* http://localhost:9000/dj4e returns a `text/plain` (200) response.
+* http://localhost:9000/js4e returns a HTTP redirect (302) response.
+* http://localhost:9000/broken routes to a view which has a bug that
 returns a string instead of an `HttpResponse` object.  The `httpServer()` detects this and returns a HTTP server error
-(<a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">500</a>) response.
-
-<a href="http://localhost:9000/blah" target="_blank">http://localhost:9000/blah</a> is a path that has no view and so the router
-returns a HTTP Page not found
-(<a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">404</a>) error.
+(500) response.
+* http://localhost:9000/blah is a path that has no view and so the router
+returns a HTTP Page not found (404)
 
 Looking at Code
 ---------------
