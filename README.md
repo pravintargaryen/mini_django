@@ -2,9 +2,21 @@
 Mini Django Web Server
 ======================
 
-This is a very small Python web server that takes inspiration from Django.  To
-run this server, type:
+This is a very small Python web server that takes inspiration from Django. 
 
+To install this source code, you can either
+
+* Use `git` to checkout this repository into a folder
+
+        cd  (into some folder on your computer where you do programming things)
+        git clone https://github.com/csev/mini_django/
+  
+* Download a zip file from this repository and unzip it into a folder
+
+After you have a copy of the code in a folder on your computer, to run this (assuming you
+have Python installed), you navigate into the folder and run the server.
+
+    cd mini_django
     python runserver.py
 
 And navigate to http://localhost:9000
