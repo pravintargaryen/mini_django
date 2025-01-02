@@ -31,6 +31,9 @@ And navigate to http://localhost:9001
 Looking at Code
 ---------------
 
+There is a PowerPoint presenation describing `mini_django` on the DJ4E web site 
+at <a href="https://www.dj4e.com/lectures/mini_django.pptx" target="_blank">https://www.dj4e.com/lectures/mini_django.pptx</a>.
+
 `mini_django.py`
 
 This file is about 200 lines of Python and approximates the entire Django library in a very simple way.  It
