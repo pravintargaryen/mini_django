@@ -82,18 +82,21 @@ def responseSend(clientsocket, response: HttpResponse) :
         print(response)
         print(traceback.format_exc())
 
-# If we are sending HTML, include the endpoint for the DJ4E JavaScript autograder
-# If you don't want to include the autograder library run this as
-# python runserver.py 9000 none
-# For local dev testing, this can be run as
+# If we are sending HTML, optionally include the endpoint for the DJ4E JavaScript autograder
+
+# If you want to include the autograder library run this as follows:
+# python runserver.py 9000 autograder
+
+# To use a local copy of the autograder library, run as follows:
 # python runserver.py 9000 http://localhost:8888/dj4e/tools/jsauto/autograder.js
 
 def patchAutograder(line: str) -> str:
+    if len(sys.argv) < 3 : return line
     if line.find('</body>') == -1 : return line
-    dj4e_autograder = "https://www.dj4e.com/tools/jsauto/autograder.js"
-    if len(sys.argv) > 2 :
+    if sys.argv[2] == "autgrader" :
+        dj4e_autograder = "https://www.dj4e.com/tools/jsauto/autograder.js"
+    else:
         dj4e_autograder = sys.argv[2]
-    if dj4e_autograder == "none" : return
     return line.replace('</body>', '\n<script src="'+dj4e_autograder+'"></script>\n</body>')
 
 def httpServer(router, port):

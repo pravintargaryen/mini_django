@@ -62,14 +62,14 @@ AutoGrader Support
 ------------------
 
 As this code is part of the <a href="https://www.dj4e.com/" target="_blank">Django for Everybody</a>
-course, it includes a small JavaScript library to enable this code to be autograded as an assignment
-for the course.  Take a look at the `patchAutograder()` method in `mini_django` for details.
+course, it has the ability to  a small JavaScript library to enable this code to be autograded
+as an assignment for the course.  Take a look at the `patchAutograder()` method in `mini_django` for details.
 
 The autograder library is only included in `text/html` responses.
 
-If you want to run this without including the autograder run the program as follows:
+If you want include the autograder library in your application start the web server as follows:
 
-    python ruserver.py 9000 none
+    python ruserver.py 9000 autograder
 
 Assuming you have DJ4E running on your computer, you can  do development with a local
 copy of the autograder JavaScript endpoint as follows:
