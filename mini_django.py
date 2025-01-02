@@ -93,7 +93,7 @@ def responseSend(clientsocket, response: HttpResponse) :
 def patchAutograder(line: str) -> str:
     if len(sys.argv) < 3 : return line
     if line.find('</body>') == -1 : return line
-    if sys.argv[2] == "autgrader" :
+    if sys.argv[2] == "autograder" :
         dj4e_autograder = "https://www.dj4e.com/tools/jsauto/autograder.js"
     else:
         dj4e_autograder = sys.argv[2]
