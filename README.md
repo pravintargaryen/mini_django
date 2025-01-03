@@ -46,6 +46,9 @@ Looking at Code
 There is a PowerPoint presenation describing `mini_django` on the DJ4E web site 
 at <a href="https://www.dj4e.com/lectures/mini_django.pptx" target="_blank">https://www.dj4e.com/lectures/mini_django.pptx</a>.
 
+There is a video code walkthrough of this application available at:
+at <a href="https://youtu.be/q6LGpiVPwaA" target="_blank">https://youtu.be/q6LGpiVPwaA</a>.
+
 `mini_django.py`
 
 This file is about 200 lines of Python and approximates the entire Django library in a very simple way.  It
