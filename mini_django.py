@@ -23,6 +23,10 @@ class HttpResponse:
 
     def write(self, line: str) :
         self._body.append(line)
+    def write_html(self, html: str):
+        with open(html, "r") as file:
+            self._body.append(file.read())
+
 
 def parseRequest(rd:str) -> HttpRequest:
     retval = HttpRequest()
@@ -57,7 +61,7 @@ def responseSend(clientsocket, response: HttpResponse) :
 
     try:
         print('==== Sending Response Headers')
-        firstline = "HTTP/1.1 "+response.code+" OK\r\n"
+        firstline = "HTTP/1.1 "+str(response.code)+" OK\r\n"
         clientsocket.sendall(firstline.encode())
         for key, value in response.headers.items():
             print(key+': '+value)
@@ -171,4 +175,11 @@ def view_fail(req: HttpRequest, code: str, failure: str) -> HttpResponse:
     res.write("</pre></body></html>")
     return res
 
+
+def render(req: HttpRequest, template_name: str) -> HttpResponse:
+    res = HttpResponse()
+    res.code = 200
+    res.headers['Content-Type'] = 'text/html; charset=utf-8'
+    res.write_html(template_name)
+    return res
 

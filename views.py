@@ -1,5 +1,5 @@
 
-from mini_django import HttpRequest, HttpResponse
+from mini_django import HttpRequest, HttpResponse, render
 
 # This is similar to Django's views.py
 
@@ -15,10 +15,11 @@ def root(req: HttpRequest) -> HttpResponse:
     return res
 
 def dj4e(req: HttpRequest) -> HttpResponse:
-    res = HttpResponse()
-    res.headers['Content-Type'] = 'text/plain; charset=utf-8'
-    res.write("Django is fun")
-    return res
+    # res = HttpResponse()
+    # res.headers['Content-Type'] = 'text/html; charset=utf-8'
+    # res.write("<h1>Django is fun<h1>")
+    # return res
+    return render(req, "index.html")
 
 def js4e(req: HttpRequest) -> HttpResponse:
     res = HttpResponse()
