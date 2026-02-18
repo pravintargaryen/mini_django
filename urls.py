@@ -14,6 +14,12 @@ def router(request: HttpRequest) -> HttpResponse:
         return views.js4e(request)
     elif request.path == '/broken' : 
         return views.broken(request)
+    elif request.path == '/rsc_page':
+        return views.rsc_page(request)    
+    elif request.path == '/home_component':
+        return views.home_component(request)      
+    elif request.path == '/home':
+        return views.home(request)     
 
     # When all else fails send the 404 screen
     else :

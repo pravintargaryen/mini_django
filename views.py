@@ -1,5 +1,5 @@
-
-from mini_django import HttpRequest, HttpResponse, render
+from mini_django import HttpRequest, HttpResponse, render, render_component, render_rsc_page
+from components import HomePage
 
 # This is similar to Django's views.py
 
@@ -32,8 +32,29 @@ def js4e(req: HttpRequest) -> HttpResponse:
 def broken(req: HttpRequest):
     return "I am a broken view, returning a string by mistake"
 
+def h(tag, props=None, *children):
+    normalized_children = []
+
+    for child in children:
+        if child is None:
+            continue
+        elif isinstance(child, list):
+            normalized_children.extend(child)
+        else:
+            normalized_children.append(child)
+
+    return {
+        "type": tag,
+        "props": props or {},
+        "children": normalized_children
+    }
+
+def home_component(req: HttpRequest) -> HttpResponse:
+    return render_component(req, HomePage)
 
 
+def rsc_page(req: HttpRequest) -> HttpResponse:
+    return render(req, "rsc.html")
 
-
-
+def home(req):
+    return render_rsc_page(req, HomePage)    

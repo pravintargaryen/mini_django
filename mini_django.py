@@ -148,7 +148,7 @@ def httpServer(router, port):
 
 def view_fail(req: HttpRequest, code: str, failure: str) -> HttpResponse:
     res = HttpResponse()
-
+    method = req.method if req else "UNKNOWN"
     print(" ")
     print("Sending view_fail, code="+code+" failure="+failure)
 
@@ -164,7 +164,7 @@ def view_fail(req: HttpRequest, code: str, failure: str) -> HttpResponse:
         res.write('<div style="background-color: pink;">')
 
     res.write('<b>Page has errors</b>')
-    res.write('<div><b>Request Method:</b> '+req.method+"</div>")
+    res.write('<div><b>Request Method:</b> ' + method + "</div>")
     res.write('<div><b>Request URL:</b> '+req.path+'</div>')
     res.write('<div><b>Response Failure:</b> '+failure+'</div>')
     res.write('<div><b>Response Code:</b> '+res.code+'</div>')
@@ -183,3 +183,76 @@ def render(req: HttpRequest, template_name: str) -> HttpResponse:
     res.write_html(template_name)
     return res
 
+def h(tag, props=None, *children):
+    normalized_children = []
+
+    for child in children:
+        if child is None:
+            continue
+        elif isinstance(child, list):
+            normalized_children.extend(child)
+        else:
+            normalized_children.append(child)
+
+    return {
+        "type": tag,
+        "props": props or {},
+        "children": normalized_children
+    }
+
+    
+def render_component(req: HttpRequest, component_func) -> HttpResponse:
+    tree = component_func()
+    json_string = json.dumps(tree)
+
+    res = HttpResponse()
+    res.code = "200"
+    res.headers['Content-Type'] = 'application/json; charset=utf-8'
+
+    # ⭐ THIS is the correct way in your framework
+    res.write(json_string)
+
+    return res
+
+def render_rsc_page(req: HttpRequest, component_func) -> HttpResponse:
+    tree = component_func()
+    json_payload = json.dumps(tree)
+
+    res = HttpResponse()
+    res.code = "200"
+    res.headers['Content-Type'] = 'text/html; charset=utf-8'
+
+    html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+
+<div id="root">Loading...</div>
+
+<script>
+  const SERVER_COMPONENT = {json_payload};
+
+  function createElementFromJSON(node) {{
+    if (typeof node === "string") return node;
+    return React.createElement(
+      node.type,
+      node.props,
+      ...node.children.map(createElementFromJSON)
+    );
+  }}
+
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  const component = createElementFromJSON(SERVER_COMPONENT);
+  root.render(component);
+</script>
+
+</body>
+</html>
+"""
+
+    res.write(html)
+    return res    
