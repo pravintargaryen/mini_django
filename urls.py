@@ -1,5 +1,5 @@
 
-from mini_django import HttpRequest, HttpResponse, view_fail
+from mini_django import HttpRequest, HttpResponse, view_fail, broken_404
 import views
 
 # This is similar to Django's urls.py
@@ -19,7 +19,9 @@ def router(request: HttpRequest) -> HttpResponse:
     elif request.path == '/home_component':
         return views.home_component(request)      
     elif request.path == '/home':
-        return views.home(request)     
+        return views.home(request)
+    elif request.path == "/404":
+        return broken_404(request, "404")         
 
     # When all else fails send the 404 screen
     else :

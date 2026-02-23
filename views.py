@@ -1,4 +1,4 @@
-from mini_django import HttpRequest, HttpResponse, render, render_component, render_rsc_page
+from mini_django import HttpRequest, HttpResponse, render, render_component, render_rsc_page, broken_404
 from components import HomePage
 
 # This is similar to Django's views.py
@@ -58,3 +58,5 @@ def rsc_page(req: HttpRequest) -> HttpResponse:
 
 def home(req):
     return render_rsc_page(req, HomePage)    
+
+

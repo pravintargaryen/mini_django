@@ -256,3 +256,14 @@ def render_rsc_page(req: HttpRequest, component_func) -> HttpResponse:
 
     res.write(html)
     return res    
+
+def broken_404(req:HttpRequest , code:str) -> HttpResponse:
+    res = HttpResponse()
+    method = req.method if req else "UNKNOWN"
+    res.code = code
+    res.headers['Content-Type'] = 'text/html; charset=utf-8'
+    res.write("<!DOCTYPE html>");
+    res.write('<html><body>')    
+    res.write('<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJLm8EZ2mlaDVgGihyFt_qFn9reeV8wp0mxBDunJSFPYJaTEiazBbfYYL80Tr7xjO8n1rS4EEXEm-Uj6P3yD3YuiL0_JDw53gOBG4HEwVoJhOgma7oPIhub3cTlwp3jSswU0F1ow/s640/google-error-page-2011.png" />')
+    res.write("</body></html>")    
+    return res    
