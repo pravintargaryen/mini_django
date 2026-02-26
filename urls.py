@@ -19,7 +19,9 @@ def router(request: HttpRequest) -> HttpResponse:
     elif request.path == '/home_component':
         return views.home_component(request)      
     elif request.path == '/home':
-        return views.home(request)
+        return views.home(request)   
+    elif request.path == '/users':
+        return views.users(request)      
     elif request.path == "/404":
         return broken_404(request, "404")         
 
