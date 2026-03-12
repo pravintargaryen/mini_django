@@ -1,5 +1,6 @@
 from mini_django import jsx
 from mini_django import ng_component
+import time
 
 @ng_component
 def UsersPage():
@@ -26,3 +27,18 @@ def HomePage():
         <Counter />
     </div>
     """
+
+
+
+def SlowPosts():
+
+    time.sleep(2)
+
+    return {
+        "type": "ul",
+        "props": {},
+        "children": [
+            {"type": "li", "props": {}, "children": ["Post A"]},
+            {"type": "li", "props": {}, "children": ["Post B"]},
+        ]
+    }

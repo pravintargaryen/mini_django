@@ -21,7 +21,15 @@ def router(request: HttpRequest) -> HttpResponse:
     elif request.path == '/home':
         return views.home(request)   
     elif request.path == '/users':
-        return views.users(request)      
+        return views.users(request)   
+    elif request.path == "/stream":
+        return views.stream_demo(request) 
+    elif request.path == "/blog":
+        return views.blog_page(request)              
+    elif request.path == "/events":
+        return views.events(request) 
+    elif request.path == "/eventspage":
+        return views.events_page(request)            
     elif request.path == "/404":
         return broken_404(request, "404")         
 

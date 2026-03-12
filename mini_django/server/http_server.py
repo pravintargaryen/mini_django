@@ -2,7 +2,7 @@ from socket import *
 import traceback, json
 import sys
 import re
-from mini_django import HttpRequest, HttpResponse
+from mini_django import HttpRequest, HttpResponse, StreamingHttpResponse
 
 def httpServer(router, port):
     print('\n================ Starting mini_django server on '+str(port))
@@ -33,7 +33,8 @@ def httpServer(router, port):
 
             try:
                 responseSend(clientsocket, response)
-                clientsocket.shutdown(SHUT_WR)
+                if not isinstance(response, StreamingHttpResponse):
+                    clientsocket.shutdown(SHUT_WR)
             except Exception as exc :
                 print(exc)
                 print(traceback.format_exc())
@@ -117,7 +118,7 @@ def parseRequest(rd:str) -> HttpRequest:
         retval.headers[pieces[0].strip()] = pieces[1].strip()
     return retval
 
-def responseSend(clientsocket, response: HttpResponse) :
+def responseSend(clientsocket, response):
 
     try:
         print('==== Sending Response Headers')
@@ -133,12 +134,23 @@ def responseSend(clientsocket, response: HttpResponse) :
 
         clientsocket.sendall("\r\n".encode())
         chars = 0
-        for line in response._body:
-            line = patchAutograder(line)
+        # ⭐ STREAMING RESPONSE
+        if isinstance(response, StreamingHttpResponse):
 
-            chars += len(line)
-            clientsocket.sendall(line.replace("\n", "\r\n").encode())
-            clientsocket.sendall("\r\n".encode())
+            for chunk in response.generator:
+                chunk = patchAutograder(chunk)
+                chars += len(chunk)
+
+                clientsocket.sendall(chunk.replace("\n", "\r\n").encode())
+                clientsocket.sendall("\r\n".encode())
+        # ⭐ NORMAL RESPONSE
+        else:
+            for line in response._body:
+                line = patchAutograder(line)
+
+                chars += len(line)
+                clientsocket.sendall(line.replace("\n", "\r\n").encode())
+                clientsocket.sendall("\r\n".encode())
         print("==== Sent",chars,"characters body output")
 
     except Exception as exc :

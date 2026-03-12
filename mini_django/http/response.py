@@ -11,3 +11,11 @@ class HttpResponse:
     def write_html(self, html: str):
         with open(html, "r") as file:
             self._body.append(file.read())
+
+@dataclass
+class StreamingHttpResponse(HttpResponse):
+    def __init__(self, generator):
+        super().__init__()
+        self.generator = generator
+
+    
