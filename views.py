@@ -1,4 +1,5 @@
 from mini_django import HttpRequest, HttpResponse, render, render_component, render_rsc_page, broken_404,  StreamingHttpResponse, Suspense, render_suspense, SSE
+from mini_django import Jsonresponse
 from components import HomePage, UsersPage, SlowPosts
 import time
 # This is similar to Django's views.py
@@ -96,3 +97,8 @@ def events(req):
 
 def events_page(req: HttpRequest) -> HttpResponse:
     return render(req, "events.html")    
+
+def rest(req: HttpRequest) -> HttpRequest:
+    return Jsonresponse({
+    "message": "Hello world"
+})

@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+import json
 
 @dataclass
 class HttpResponse:
@@ -12,10 +13,20 @@ class HttpResponse:
         with open(html, "r") as file:
             self._body.append(file.read())
 
+    @property
+    def body(self):
+        return "".join(self._body)        
+
 @dataclass
 class StreamingHttpResponse(HttpResponse):
     def __init__(self, generator):
         super().__init__()
         self.generator = generator
 
-    
+
+@dataclass
+class Jsonresponse(HttpResponse):
+    def __init__(self, data, code=200, headers=None):
+        super().__init__(code=code, headers=headers or {})  
+        self.headers["Content-Type"] = "application/json" 
+        self.write(json.dumps(data)) 

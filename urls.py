@@ -32,7 +32,8 @@ def router(request: HttpRequest) -> HttpResponse:
         return views.events_page(request)            
     elif request.path == "/404":
         return broken_404(request, "404")         
-
+    elif request.path == "/rest":
+        return views.rest(request)
     # When all else fails send the 404 screen
     else :
         return view_fail(request, "404", "urls.py could not find a view for the path")

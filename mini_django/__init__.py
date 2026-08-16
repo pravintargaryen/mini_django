@@ -1,5 +1,5 @@
 from .http.request import HttpRequest
-from .http.response import HttpResponse, StreamingHttpResponse
+from .http.response import HttpResponse, StreamingHttpResponse, Jsonresponse
 from .http.sse import SSE
 from .rendering.html import render
 from .rendering.jsx import h, jsx, render_component, render_rsc_page
@@ -14,6 +14,7 @@ __all__ = [
     "HttpResponse",
     "StreamingHttpResponse",
     "SSE",
+    "Jsonresponse",
     "Suspense",
     "render_suspense",
     "render",
