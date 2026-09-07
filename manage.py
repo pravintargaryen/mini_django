@@ -1,5 +1,5 @@
 import sys
-from mini_django import httpServer
+from mini_django import httpServer, send_mail
 import urls
 
 
@@ -26,6 +26,14 @@ def main():
     elif command == "shell":
         import code
         code.interact(local=globals())
+
+    elif command == "sendmail":
+        email = input('email address:')
+        password = input('password:')
+        subject = input('subject:')
+        from_address = input('from_address:')
+        to_address = input('to_address:')
+        send_mail(email=email, password=password, subject=subject, from_address=from_address, to_address=to_address)            
 
     else:
         print(f"Unknown command: {command}")

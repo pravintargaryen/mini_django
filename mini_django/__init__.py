@@ -7,6 +7,7 @@ from .rendering.angular import ng_component
 from .rendering.suspense import Suspense
 from .rendering.suspense_renderer import render_suspense
 from .server.http_server import httpServer, view_fail, broken_404
+from .core.mail import send_mail
 
 
 __all__ = [
@@ -26,4 +27,5 @@ __all__ = [
     "httpServer",
     "view_fail",
     "broken_404",
+    "send_mail",
 ]
